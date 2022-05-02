@@ -16,7 +16,6 @@ For using face tracking, you would need also OpenCV libary, which face detection
 
 https://opencv.org
 
-&nbsp;
 
 ## Iruin:
 &nbsp;
@@ -26,7 +25,7 @@ You also need Iriun webcam app, to get live video from phone to computer. Iriun 
 
 https://iriun.com
 
-# Week reports and more information in Wiki.
+## Week reports and more information in Wiki.
 
 
 
