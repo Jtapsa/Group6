@@ -2,7 +2,7 @@
 
 For using face tracking, you would need also OpenCV libary, which face detection functions code use. 
 
-<img src="https://miro.medium.com/max/625/1*7OufQOqANZKEcQhOz6VFHQ.jpeg"/>
+<img src="https://miro.medium.com/max/1024/1*wFcEuz4CtvdgJUW-mkKvZg.jpeg"/>
 
 https://opencv.org
 
