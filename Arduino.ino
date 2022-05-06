@@ -24,7 +24,7 @@ void setup() {
   pinMode(motor2Pin1, OUTPUT);
   pinMode(motor2Pin2, OUTPUT);
   
-  Serial.begin(115200);
+  Serial.begin(2000000);
 
 }
 
@@ -38,7 +38,7 @@ void loop() {
     //move forward
     
     if(command == 'F') {
-      if(previous == 1 && count < 4){  
+      if(previous == 1 && count < 3){  
         state = 1;
         count += 1;
         
@@ -46,14 +46,17 @@ void loop() {
         state = 1;
         count = 0;
         
-      } 
+      } else {
+        count += 1;
+        state = 5;
+      }
       previous = 1; 
     }
     
     //move backward
     
     if(command == 'B'){
-      if(previous == 2 && count < 4){
+      if(previous == 2 && count < 3){
         state = 2;
         count += 1;
         
@@ -61,14 +64,17 @@ void loop() {
         state = 2;
         count = 0;
         
-      } 
+      } else {
+        count += 1;
+        state = 5;
+      }
       previous = 2;
     }
     
     //turn right
     
     if(command == 'R'){
-      if(previous == 3 && count < 4){
+      if(previous == 3 && count < 1){
         state = 3;
         count += 1;
         
@@ -76,6 +82,9 @@ void loop() {
         state = 3;
         count = 0;
  
+      } else {
+        count += 1;
+        state = 5;
       } 
       previous = 3; 
     }
@@ -84,7 +93,7 @@ void loop() {
     //turn left
     
     if(command == 'L'){
-      if(previous == 4 && count < 4){
+      if(previous == 4 && count < 1){
         state = 4;
         count += 1;
         
@@ -92,8 +101,83 @@ void loop() {
         state = 4;
         count = 0;
         
-      } 
+      } else {
+        count += 1;
+        state = 5;
+      }
       previous = 4;
+    }
+    
+    // turn left little
+   
+    if(command == 'A'){
+      if(previous == 6 && count < 3){
+        state = 6;
+        count += 1;
+        
+      } else if (previous != 6) {
+        state = 6;
+        count = 0;
+        
+      } else {
+        count += 1;
+        state = 5;
+      }
+      previous = 6;
+    }
+
+    // turn right little
+   
+    if(command == 'C'){
+      if(previous == 7 && count < 3){
+        state = 7;
+        count += 1;
+        
+      } else if (previous != 7) {
+        state = 7;
+        count = 0;
+        
+      } else {
+        count += 1;
+        state = 5;
+      }
+      previous = 7;
+    }
+
+    //Go back little
+
+    if(command == 'D'){
+      if(previous == 8 && count < 3){
+        state = 8;
+        count += 1;
+        
+      } else if (previous != 8) {
+        state = 8;
+        count = 0;
+        
+      } else {
+        count += 1;
+        state = 5;
+      }
+      previous = 8;
+    }
+
+    //Go forward little
+
+    if(command == 'D'){
+      if(previous == 9 && count < 3){
+        state = 9;
+        count += 1;
+        
+      } else if (previous != 9) {
+        state = 9;
+        count = 0;
+        
+      } else {
+        count += 1;
+        state = 5;
+      }
+      previous = 9;
     }
     
     //do nothing
@@ -101,6 +185,7 @@ void loop() {
     if(command == 'S'){
       state = 5;
       count = 0;
+      previous = 5;
     }
     
   }
@@ -112,7 +197,7 @@ void loop() {
       digitalWrite(motor1Pin2, HIGH);
       analogWrite(motor2Pin1, LOW);
       digitalWrite(motor2Pin2, HIGH);
-      delay(50); 
+      delay(300); 
       
       analogWrite(motor1Pin1, LOW);
       digitalWrite(motor1Pin2, LOW);
@@ -129,7 +214,7 @@ void loop() {
       digitalWrite(motor1Pin2, LOW);
       digitalWrite(motor2Pin1, HIGH);
       digitalWrite(motor2Pin2, LOW);
-      delay(50);
+      delay(300);
       
       analogWrite(motor1Pin1, LOW);
       digitalWrite(motor1Pin2, LOW);
@@ -144,7 +229,13 @@ void loop() {
       digitalWrite(motor1Pin2, LOW);
       digitalWrite(motor2Pin1, LOW);
       digitalWrite(motor2Pin2, HIGH);
-      delay(50);
+      delay(250);
+
+      analogWrite(motor1Pin1, LOW);
+      digitalWrite(motor1Pin2, HIGH);
+      analogWrite(motor2Pin1, LOW);
+      digitalWrite(motor2Pin2, HIGH);
+      delay(150);
       
       analogWrite(motor1Pin1, LOW);
       digitalWrite(motor1Pin2, LOW);
@@ -160,7 +251,13 @@ void loop() {
       digitalWrite(motor1Pin2, HIGH);
       digitalWrite(motor2Pin1, LOW);
       digitalWrite(motor2Pin2, LOW);
-      delay(50);
+      delay(250);
+
+      analogWrite(motor1Pin1, LOW);
+      digitalWrite(motor1Pin2, HIGH);
+      analogWrite(motor2Pin1, LOW);
+      digitalWrite(motor2Pin2, HIGH);
+      delay(150);
       
       analogWrite(motor1Pin1, LOW);
       digitalWrite(motor1Pin2, LOW);
@@ -176,6 +273,80 @@ void loop() {
       digitalWrite(motor1Pin2, LOW);
       digitalWrite(motor2Pin1, LOW);
       digitalWrite(motor2Pin2, LOW);
+    }
+
+     //STATE 6: move right little
+    if (state == 6) {
+      digitalWrite(motor1Pin1, LOW);
+      digitalWrite(motor1Pin2, HIGH);
+      digitalWrite(motor2Pin1, LOW);
+      digitalWrite(motor2Pin2, LOW);
+      delay(100);
+
+      analogWrite(motor1Pin1, LOW);
+      digitalWrite(motor1Pin2, HIGH);
+      analogWrite(motor2Pin1, LOW);
+      digitalWrite(motor2Pin2, HIGH);
+      delay(100);
+      
+      analogWrite(motor1Pin1, LOW);
+      digitalWrite(motor1Pin2, LOW);
+      analogWrite(motor2Pin1, LOW);
+      digitalWrite(motor2Pin2, LOW);
+
+    }
+
+    //STATE 7: move right little
+    if (state == 7) {
+      digitalWrite(motor1Pin1, LOW);
+      digitalWrite(motor1Pin2, LOW);
+      digitalWrite(motor2Pin1, LOW);
+      digitalWrite(motor2Pin2, HIGH);
+      delay(100);
+
+      analogWrite(motor1Pin1, LOW);
+      digitalWrite(motor1Pin2, HIGH);
+      analogWrite(motor2Pin1, LOW);
+      digitalWrite(motor2Pin2, HIGH);
+      delay(100);
+      
+      analogWrite(motor1Pin1, LOW);
+      digitalWrite(motor1Pin2, LOW);
+      analogWrite(motor2Pin1, LOW);
+      digitalWrite(motor2Pin2, LOW);
+
+    }
+
+     //STATE 2: move backward little
+    
+    if (state == 8) {
+      digitalWrite(motor1Pin1, HIGH);
+      digitalWrite(motor1Pin2, LOW);
+      digitalWrite(motor2Pin1, HIGH);
+      digitalWrite(motor2Pin2, LOW);
+      delay(200);
+      
+      analogWrite(motor1Pin1, LOW);
+      digitalWrite(motor1Pin2, LOW);
+      analogWrite(motor2Pin1, LOW);
+      digitalWrite(motor2Pin2, LOW);
+       
+     }
+
+    //STATE 9: move forward little
+  
+    if (state == 9) {
+      analogWrite(motor1Pin1, LOW);
+      digitalWrite(motor1Pin2, HIGH);
+      analogWrite(motor2Pin1, LOW);
+      digitalWrite(motor2Pin2, HIGH);
+      delay(200); 
+      
+      analogWrite(motor1Pin1, LOW);
+      digitalWrite(motor1Pin2, LOW);
+      analogWrite(motor2Pin1, LOW);
+      digitalWrite(motor2Pin2, LOW);
+  
     }
 
 }
